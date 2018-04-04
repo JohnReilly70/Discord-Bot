@@ -69,6 +69,21 @@ class John_Bot(Music):
         string = "".join(string)
         await bot.say(eval(string))
 
+    @commands.command(pass_context=False, no_pm=True)
+    async def GMaps(self, *string):
+        print(string)
+        if len(string) == 1:
+            output = ('https://www.google.co.uk/maps/place/{}\''.format(string[0]))
+        else:
+            output = 'https://www.google.co.uk/maps/dir/'
+            for location in list(string):
+                location = location.replace(" ","+")
+                location = location.replace(",", "+,")
+                output += str(location)
+                output += '/'
+        output += ''
+        await bot.say(output)
+
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('?'), description='A playlist example for discord.py')
 bot.add_cog(John_Bot(bot))
